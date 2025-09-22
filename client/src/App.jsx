@@ -1,8 +1,17 @@
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import DashboardLayout from "./layout/DashboardLayout";
+
 function App() {
   return (
-    <>
-      <h1>this is dummy app</h1>
-    </>
+    <BrowserRouter>
+      <Routes>
+        <Route element={<DashboardLayout role="student" />} >
+          <Route index element={<h1>this is home</h1>} />
+          <Route path="dashboard" element={<h1>this is dashboard</h1>} />
+          <Route path="settings" element={<h1>this is setting</h1>} />
+        </Route>
+      </Routes>
+    </BrowserRouter>
   )
 }
 
