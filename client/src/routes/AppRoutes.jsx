@@ -1,6 +1,7 @@
 import React from "react";
 import { Routes, Route } from "react-router-dom";
 
+import ProtectedRoute from "../components/common/ProtectedRoute";
 import DashboardLayout from "../layout/DashboardLayout";
 
 // student pages
@@ -14,7 +15,11 @@ import ManageTests from "../pages/admin/ManageTests";
 function AppRoutes({ role = "student" }) {
   return (
     <Routes>
-      <Route path="/" element={<DashboardLayout role={role} />} >
+      <Route path="/" element={
+        <ProtectedRoute isAuthenticated={!!role}>
+          <DashboardLayout role={role} />
+        </ProtectedRoute>
+      } >
         {role === "student" ? (
           <>
             <Route index element={<StudentDashboard />} />
