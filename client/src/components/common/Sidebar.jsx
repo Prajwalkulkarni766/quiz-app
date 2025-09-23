@@ -1,6 +1,6 @@
 import React from "react";
 import { Menu } from "antd";
-import { DashboardOutlined, FileTextOutlined } from "@ant-design/icons";
+import { DashboardOutlined, FileTextOutlined, QuestionOutlined } from "@ant-design/icons";
 import { useNavigate, useLocation } from "react-router-dom";
 
 function Sidebar({ role = "student" }) {
@@ -10,12 +10,15 @@ function Sidebar({ role = "student" }) {
 
   const menuItems = role === "admin"
     ? [
-      { key: "/dashboard", icon: <DashboardOutlined />, label: "Dashboard" },
-      { key: "/settings", icon: <FileTextOutlined />, label: "Manage Tests" },
+      { key: "/admin", icon: <DashboardOutlined />, label: "Dashboard" },
+      { key: "/admin/tests", icon: <FileTextOutlined />, label: "Manage Tests" },
+      { key: "/admin/create-test", icon: <FileTextOutlined />, label: "Create Tests" },
+      { key: "/admin/add-question", icon: <FileTextOutlined />, label: "Add question" },
     ]
     : [
-      { key: "/dashboard", icon: <DashboardOutlined />, label: "Dashboard" },
-      { key: "/settings", icon: <FileTextOutlined />, label: "My Scores" },
+      { key: "/student", icon: <DashboardOutlined />, label: "Dashboard" },
+      { key: "/student/scores", icon: <FileTextOutlined />, label: "My Scores" },
+      { key: "/student/test", icon: <QuestionOutlined />, label: "Test" },
     ];
 
   return (
