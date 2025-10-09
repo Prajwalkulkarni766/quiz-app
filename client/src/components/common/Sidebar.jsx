@@ -2,11 +2,12 @@ import React from "react";
 import { Menu } from "antd";
 import { DashboardOutlined, FileTextOutlined, QuestionOutlined } from "@ant-design/icons";
 import { useNavigate, useLocation } from "react-router-dom";
+import { useTheme } from "../../context/ThemeContext";
 
 function Sidebar({ role = "student" }) {
-
   const navigate = useNavigate();
   const location = useLocation();
+  const { mode } = useTheme();
 
   const menuItems = role === "admin"
     ? [
@@ -21,8 +22,10 @@ function Sidebar({ role = "student" }) {
       { key: "/student/test", icon: <QuestionOutlined />, label: "Test" },
     ];
 
+  const backgroundColor = mode === "dark" ? "#001529" : "#fff";
+
   return (
-    <div style={{ height: "100%", background: "#fff" }}>
+    <div style={{ height: "100%", background: backgroundColor }}>
       <div
         style={{
           height: 64,
@@ -31,6 +34,7 @@ function Sidebar({ role = "student" }) {
           justifyContent: "center",
           fontWeight: "bold",
           fontSize: 18,
+          color: mode === "dark" ? "#fff" : "#000",
         }}
       >
         Quiz
@@ -41,6 +45,7 @@ function Sidebar({ role = "student" }) {
         items={menuItems}
         selectedKeys={[location.pathname]}
         onClick={({ key }) => navigate(key)}
+        theme={mode === "dark" ? "dark" : "light"}
       />
     </div>
   )

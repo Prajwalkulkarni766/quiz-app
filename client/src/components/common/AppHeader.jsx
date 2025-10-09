@@ -1,43 +1,60 @@
 import React from "react";
-import { Layout, Dropdown, Avatar, Menu } from "antd";
-import { UserOutlined, LogoutOutlined } from "@ant-design/icons";
+import { Layout, Dropdown, Avatar } from "antd";
+import { UserOutlined, LogoutOutlined, BulbOutlined, BulbFilled } from "@ant-design/icons";
+import { useTheme } from "../../context/ThemeContext";
+import { Switch } from "antd";
 
 const { Header } = Layout;
 
 function AppHeader() {
+  const { mode, toggleTheme } = useTheme();
 
-  const menu = (
-    <Menu>
-      <Menu.Item key={"profile"} icon={<UserOutlined />}>
-        Profile
-      </Menu.Item>
-      <Menu.Item key={"logout"} icon={<LogoutOutlined />}>
-        Logout
-      </Menu.Item>
-    </Menu>
-  )
+  const menuItems = [
+    {
+      key: "profile",
+      icon: <UserOutlined />,
+      label: "Profile",
+    },
+    {
+      key: "logout",
+      icon: <LogoutOutlined />,
+      label: "Logout",
+    },
+  ];
 
   return (
-    <>
-      <Header
-        style={{
-          background: "#fff",
-          padding: "0 20px",
-          display: "flex",
-          justifyContent: "flex-end",
-          alignItems: "center",
-          boxShadow: "0 1px 4px rgba(0,0,0,0.1)",
-        }}
+    <Header
+      style={{
+        background: mode === "dark" ? "#001529" : "#fff",
+        color: mode === "dark" ? "#fff" : "#000",
+        padding: "0 20px",
+        display: "flex",
+        justifyContent: "flex-end",
+        alignItems: "center",
+        boxShadow: "0 1px 4px rgba(0,0,0,0.1)",
+        gap: "10px"
+      }}
+    >
+
+      <Switch
+        checked={mode === "dark"}
+        onChange={toggleTheme}
+        checkedChildren={<BulbFilled />}
+        unCheckedChildren={<BulbOutlined />}
+      />
+
+      <Dropdown
+        menu={{ items: menuItems }}
+        placement="bottomRight"
+        trigger={["click"]}
       >
-        <Dropdown menu={menu} placement="bottomRight">
-          <div style={{ cursor: "pointer", display: "flex", alignItems: "center" }}>
-            <Avatar icon={<UserOutlined />} />
-            <span>Ram</span>
-          </div>
-        </Dropdown>
-      </Header>
-    </>
-  )
+        <div style={{ cursor: "pointer", display: "flex", alignItems: "center", gap: "8px" }}>
+          <Avatar icon={<UserOutlined />} />
+          <span>Ram</span>
+        </div>
+      </Dropdown>
+    </Header>
+  );
 }
 
 export default AppHeader;
