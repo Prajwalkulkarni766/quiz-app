@@ -8,6 +8,7 @@ import DashboardLayout from "../layout/DashboardLayout";
 import StudentDashboard from "../pages/student/StudentDashboard";
 import ScorePage from "../pages/student/ScorePage";
 import TestPage from "../pages/student/TestPage";
+import TestListPage from "../pages/student/TestListPage";
 
 // admin page
 import AdminDashboard from "../pages/admin/AdminDashboard";
@@ -21,7 +22,7 @@ import Signup from "../pages/auth/Signup";
 
 import { useAuth } from "../context/AuthContext";
 
-function AppRoutes({ role = "student" }) {
+function AppRoutes() {
 
   const { user } = useAuth();
 
@@ -36,7 +37,7 @@ function AppRoutes({ role = "student" }) {
         <Route path="/student" element={<DashboardLayout />}>
           <Route index element={<StudentDashboard />} />
           <Route path="scores" element={<ScorePage />} />
-          <Route path="test" element={<TestPage />} />
+          <Route path="test" element={<TestListPage />} />
         </Route>
       </Route>
 
